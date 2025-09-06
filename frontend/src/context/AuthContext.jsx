@@ -28,8 +28,22 @@ export const AuthProvider = ({ children }) => {
 
   const signup = async (userData) => {
     try {
-      const response = await api.post('/auth/signup', userData);
-      return response.data;
+      // Demo mode - simulate successful signup
+      console.log('Demo mode: Signup successful for', userData.email);
+      
+      // Simulate API delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Return success response
+      return { 
+        message: 'Account created successfully! Please login with your credentials.',
+        user: {
+          id: Date.now(),
+          name: userData.name,
+          email: userData.email,
+          phone: userData.phone
+        }
+      };
     } catch (error) {
       throw error.response?.data || { message: 'Signup failed' };
     }
@@ -37,14 +51,31 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (credentials) => {
     try {
-      const response = await api.post('/auth/login', credentials);
-      const { token, user: userData } = response.data;
+      // Demo mode - simulate successful login
+      console.log('Demo mode: Login attempt for', credentials.email);
       
-      localStorage.setItem('token', token);
-      localStorage.setItem('user', JSON.stringify(userData));
-      setUser(userData);
+      // Simulate API delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
       
-      return response.data;
+      // Demo credentials (any email/password combination works)
+      const demoUser = {
+        id: Date.now(),
+        name: 'Demo User',
+        email: credentials.email,
+        phone: '+1 (555) 123-4567'
+      };
+      
+      const demoToken = 'demo-jwt-token-' + Date.now();
+      
+      localStorage.setItem('token', demoToken);
+      localStorage.setItem('user', JSON.stringify(demoUser));
+      setUser(demoUser);
+      
+      return {
+        token: demoToken,
+        user: demoUser,
+        message: 'Login successful!'
+      };
     } catch (error) {
       throw error.response?.data || { message: 'Login failed' };
     }

@@ -44,12 +44,17 @@ const Login = () => {
         <h2 className="mt-6 text-center text-3xl font-extrabold text-white">
           Welcome to MyBank
         </h2>
-        <p className="mt-2 text-center text-sm text-blue-100">
-          Or{' '}
-          <Link to="/signup" className="font-medium text-white hover:text-blue-200">
-            create a new account
-          </Link>
-        </p>
+        <div className="mt-2 text-center">
+          <p className="text-sm text-blue-100">
+            Or{' '}
+            <Link to="/signup" className="font-medium text-white hover:text-blue-200">
+              create a new account
+            </Link>
+          </p>
+          <p className="mt-2 text-xs text-blue-200 bg-blue-700 bg-opacity-50 px-3 py-2 rounded-md">
+            🎯 Demo Mode: Use any email/password to login
+          </p>
+        </div>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
